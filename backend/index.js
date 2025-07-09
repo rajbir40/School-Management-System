@@ -8,13 +8,27 @@ const Routes = require("./routes/route.js")
 
 const PORT = process.env.PORT || 5000
 
+
 dotenv.config();
 
 // app.use(bodyParser.json({ limit: '10mb', extended: true }))
 // app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 
 app.use(express.json({ limit: '10mb' }))
-app.use(cors())
+const allowedOrigin = 'https://school-management-system-frontend-5oda99xll-rajbir40s-projects.vercel.app';
+
+app.use(cors({
+  origin: allowedOrigin,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true
+}));
+
+// Handle preflight
+app.options('*', cors({
+  origin: allowedOrigin,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true
+}));
 
 mongoose
     .connect(process.env.MONGO_URL, {
