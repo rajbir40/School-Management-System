@@ -15,20 +15,9 @@ dotenv.config();
 // app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 
 app.use(express.json({ limit: '10mb' }))
-const allowedOrigin = 'https://school-management-system-frontend-5oda99xll-rajbir40s-projects.vercel.app';
-
 app.use(cors({
-  origin: allowedOrigin,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true
-}));
-
-// Handle preflight
-app.options('*', cors({
-  origin: allowedOrigin,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true
-}));
+    origin: true
+}))
 
 mongoose
     .connect(process.env.MONGO_URL, {
